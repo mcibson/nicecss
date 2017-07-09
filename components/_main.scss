@@ -1,0 +1,10 @@
+.main__header {
+  @include container;
+  color: #fff;
+}
+.main__title {
+  @include grid;
+}
+.main__subtitle {
+  @include grid;
+}

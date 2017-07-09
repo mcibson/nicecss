@@ -1,0 +1,21 @@
+/* Font Variables and Element Mixins */
+$title: 1rem;
+$title--ratio: 1.444;
+
+$title--m:    $title                     ;  // default:$title--m == $title
+$title--l:    $title      * $title--ratio;
+$title--xl:   $title--l   * $title--ratio;
+$title--xxl:  $title--xl  * $title--ratio;
+$title--s:    $title      / $title--ratio;
+$title--xs:   $title--s   / $title--ratio;
+
+
+
+.section__title {
+  @include grid(12);
+  color: #fff;
+}
+.headline {
+  margin: 0;
+  font-size: $title--l;
+}

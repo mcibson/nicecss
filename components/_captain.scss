@@ -1,0 +1,7 @@
+.captain__wrap {
+  @include container;
+}
+.captain {
+  @include card(6);
+  background: #fff;
+}

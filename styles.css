@@ -1,0 +1,160 @@
+/* Styles.scss - Starting point for css */
+/* Base Styles
+=============================================================================== */
+/* Font Settings */
+/* ============================================================================
+    NICEGRID
+=============================================================================== */
+/* Breakpoints
+=============================================================================== */
+/**
+ * Set your Breakpoints here
+ * Maximal 6 Breakpoints (https://yellowlab.tools)
+ * Default width is Mobile first  < 30em;
+ * For small css file try to avoid as many breakpoints as possible
+ */
+/* Max Width for (boxed) Container
+=============================================================================== */
+/* Standard Spacer
+=============================================================================== */
+/**
+ * Uncomment to Enable used Spacers here
+ * For small css file try to avoid as many $spacers as possible
+ */
+/* Container Spacer
+=============================================================================== */
+/**
+ * Uncomment to Enable outer paddings for container
+ * For small css file try to avoid as many $outerpaddings as possible
+ */
+/* Container Mixins
+=============================================================================== */
+/* Boxed Container
+=========================================================== */
+/* Full Width Container
+=========================================================== */
+/* Nested Container
+=========================================================== */
+/* Single Row Container - nowrap - boxed
+=========================================================== */
+/* Container with negative Margins @todo not tested
+=========================================================== */
+/* Grid mixins
+    - use for nested Grids and for width Overrides in special Breakpoints when
+      you use multiple $spacers ($spacer--mobile, $spacer--desktop)
+=============================================================================== */
+/* BEM Mixins - These Mixins are Are BEM Elements (Block__Element--Modifier */
+/* @todo - single grid mixins for custom grids */
+/* Grid Boxes
+=============================================================================== */
+/* Cards - Grids with margins (and borders)
+    - via _settings.scss: (margin-left, margin-right, padding)
+    - change manually: (background, border, margin-bottom
+=============================================================================== */
+/* BASE.SCSS
+============================================================================
+
+Style Standard HTML Elements here (ie body, html, h1, h2, h3, h4
+
+Form Elements are designed in base/_forms.scss
+Font Elements are designed in base/_fonts.scss
+
+If you want to use normalize.css or reset.css include it here and change them
+to your needs
+
+
+=============================================================================== */
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  font-family: arial, sans-serif;
+  color: #444;
+  margin: 0;
+  padding: 0;
+  background: #333;
+  padding-top: 2%; }
+
+h1, h2, h3, h4, h5, h6, ul {
+  margin: 0 0 1rem; }
+
+h1 {
+  width: 100%;
+  padding: 2%; }
+
+/* Font Variables and Element Mixins */
+.section__title {
+  width: 100%;
+  padding: 2%;
+  color: #fff; }
+
+.headline {
+  margin: 0;
+  font-size: 1.444rem; }
+
+/* Components
+=============================================================================== */
+.main__header {
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  max-width: 75em;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+  color: #fff; }
+
+.main__title {
+  width: 100%;
+  padding: 2%; }
+
+.main__subtitle {
+  width: 100%;
+  padding: 2%; }
+
+.highlights {
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  max-width: 75em;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0; }
+
+.highlight {
+  width: calc(100% - 2 * 2%);
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 2%;
+  background: #fff;
+  margin-bottom: 4%; }
+  @media (min-width: 30em) {
+    .highlight {
+      width: calc(50% - 2 * 2%); } }
+  @media (min-width: 48em) {
+    .highlight {
+      width: calc(33.33333% - 2 * 2%); } }
+
+.captain__wrap {
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  max-width: 75em;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0; }
+
+.captain {
+  width: calc(50% - 2 * 2%);
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 2%;
+  background: #fff; }
+
+/* Helpers - Keep these @imports on Bottom of this File
+=============================================================================== */
+
+/*# sourceMappingURL=styles.css.map */

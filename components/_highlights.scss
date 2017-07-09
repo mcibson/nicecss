@@ -1,0 +1,14 @@
+.highlights {
+  @include container;
+}
+.highlight {
+  @include card(12);
+  background: #fff;
+  margin-bottom: 2*$spacer;
+  @media (min-width: $mobile) {
+    @include card__width(6);
+  }
+  @media (min-width: $tablet) {
+    @include card__width(4)
+  }
+}

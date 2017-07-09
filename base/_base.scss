@@ -1,0 +1,40 @@
+/* BASE.SCSS
+============================================================================
+
+Style Standard HTML Elements here (ie body, html, h1, h2, h3, h4
+
+Form Elements are designed in base/_forms.scss
+Font Elements are designed in base/_fonts.scss
+
+If you want to use normalize.css or reset.css include it here and change them
+to your needs
+
+
+=============================================================================== */
+html {
+  box-sizing: border-box;
+}
+
+// Boxsizing Inherit is better if you need to use Components which use content-box
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: $font__family;
+  color: $font__color;
+  margin: 0;
+  padding: 0;
+
+  // Custom
+  background: #333;
+  padding-top: $spacer;
+}
+
+h1, h2, h3, h4, h5, h6, ul {
+  margin: 0 0 1rem;
+}
+
+h1 {
+  @include grid;
+}
