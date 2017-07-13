@@ -1,20 +1,25 @@
 /* Styles.scss - Starting point for css */
 
+/* Vendor / Plugins / External Code
+=============================================================================== */
+@import "vendor/jacket";
+@import "vendor/breakpoint";
 /* Base Styles
 =============================================================================== */
-@import "nicecss/base/settings";
-@import "nicecss/base/grid";
-@import "nicecss/base/base";
-@import "nicecss/base/fonts";
+@import "base/settings";
+@import "base/grid";
+@import "base/base";
+@import "base/fonts";
+
 
 
 /* Components
 =============================================================================== */
-@import "nicecss/components/main";
-@import "nicecss/components/highlights";
-@import "nicecss/components/captain";
+@import "components/main";
+@import "components/highlights";
+@import "components/captain";
 
 
 /* Helpers - Keep these @imports on Bottom of this File
 =============================================================================== */
-@import "nicecss/base/helpers"; // Adds status to element( .active, .hidden, .selectable, draggable, ... )
+@import "base/helpers"; // Adds status to element( .active, .hidden, .selectable, draggable, ... )

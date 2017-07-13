@@ -1,354 +1,418 @@
-/* ============================================================================
-    NICEGRID
+/* GRID SYSTEM
 =============================================================================== */
 
+/* MAX Width for Boxed Containers (@include container)
+===============================================================================*/
+$maxWidth: 1200px;
 
-/* Breakpoints
-=============================================================================== */
 
 /**
- * Set your Breakpoints here
- * Maximal 6 Breakpoints (https://yellowlab.tools)
+ * Set your Breakpoint Withs here
+ * If you want to add/remove breakpoints ... good luck
+ * Max 6 Breakpoints (https://yellowlab.tools)
  * Default width is Mobile first  < 30em;
- * For small css file try to avoid as many breakpoints as possible
+ *
+ * VARIABLES
+ * =========
+ * width: min-width of breakpoint
+ * $spacer: padding or margin of grid or card in specific breakpoint
+ * $outerspacer: padding of containers (outer parents) - Should be the same like $spacer
  */
 
-// @todo Discussion - $mobile sound like 0px - 320px
-$mobile:    30em; //  480px;  // mobile landscape
-$tablet:    48em; //  768px;  // tablet portrait
-$notebook:  60em; //  960px;  // notebook, netbook, tablet landscape
-$desktop:   75em; // 1200px;  // desktop
-$hd:       120em; // 1920px;  // HD+
+$gridmap: (
+    // breakpoint ( width, $spacer, $outerspacer )
+        default:    (   1px,  10px,  false),    // default is mobile first
+        mobile:     ( 481px,  1rem,  false),
+        tablet:     ( 769px,  false, false),
+        notebook:   ( 961px,  false, false),
+        desktop:    (1201px,  false, false),
+        hd:         (1601px,  false, false)
+);
+/* Grids don't have Margins */
+/* Cards have Margins on sides and can have borders*/
 
-/* Max Width for (boxed) Container
+/* IMPORTANT */
+/* Don't use Flex Shorthands as long as you support IE10 */
+
+/* Default is a 12 Column grid. Set $grid--max if you need another amount of columns */
+
+/* Change the Breakpoints in the $gridmap in the _shopConfig.scss file */
+// warning: don't change anything here, except you know what you are doing
+
+
+// Breakpoints
+$mobile:   nth(map-get($gridmap, mobile),1);     // mobile landscape
+$tablet:   nth(map-get($gridmap, tablet),1);     // tablet portrait
+$notebook: nth(map-get($gridmap, notebook),1);   // notebook, netbook, tablet landscape
+$desktop:  nth(map-get($gridmap, desktop),1);    // desktop
+$hd:       nth(map-get($gridmap, hd),1);         // HD+
+
+
+// SPACER
+$spacer:            nth(map-get($gridmap, default),  2);
+$spacer--mobile:    nth(map-get($gridmap, mobile),   2);
+$spacer--tablet:    nth(map-get($gridmap, tablet),   2);
+$spacer--notebook:  nth(map-get($gridmap, notebook), 2);
+$spacer--desktop:   nth(map-get($gridmap, desktop),  2);
+$spacer--hd:        nth(map-get($gridmap, hd),       2);
+
+
+// OUTER SPACER
+$container--spacer:           nth(map-get($gridmap, default),  3);
+$container--spacer--mobile:   nth(map-get($gridmap, mobile),   3);
+$container--spacer--tablet:   nth(map-get($gridmap, tablet),   3);
+$container--spacer--notebook: nth(map-get($gridmap, notebook), 3);
+$container--spacer--desktop:  nth(map-get($gridmap, desktop),  3);
+$container--spacer--hd:       nth(map-get($gridmap, hd),       3);
+
+
+// The Magic Fucntion - Get $spacer from active Breakpoint
+@function get_spacer() {
+    $spacing: $spacer; // Default Spacer
+    // Check if min-width is set
+    @if breakpoint-get-context('min-width') {
+        // Convert breakpoint list value to string to number with unit
+        $breakpoint_value: to-number( inspect( breakpoint-get-context('min-width') ) );
+
+        // Loop through $breakpointsmap
+        @each $breakpoint, $value in $gridmap {
+            @if ( $breakpoint_value >=  nth($value,1) )  {
+                $spacing: nth($value,2);
+            }
+        }
+    }
+    @return $spacing;
+}
+
+
+/* Container
 =============================================================================== */
-$maxWidth:  75em;  // 1200px;  // todo change to em or rem
 
+/* Container Base Mixins
+=========================================================== */
+@mixin container__padding {
+    @if $container--spacer != false {
+        padding-left: $container--spacer;
+        padding-right: $container--spacer; }
 
-/* Standard Spacer
-=============================================================================== */
-/**
- * Uncomment to Enable used Spacers here
- * For small css file try to avoid as many $spacers as possible
- */
-$spacer:            2%;
-//$spacer--mobile:    1rem;
-//$spacer--tablet:    $spacer--mobile;
-//$spacer--notebook:  $spacer--tablet;
-//$spacer--desktop:   $spacer--notebook;
-//$spacer--hd:        $spacer--desktop;
+    @include breakpoint($mobile) {
+        @if $container--spacer--mobile != false {
+            padding-left: $container--spacer--mobile;
+            padding-right: $container--spacer--mobile; } }
 
+    @include breakpoint($tablet) {
+        @if $container--spacer--tablet != false {
+            padding-left: $container--spacer--tablet;
+            padding-right: $container--spacer--tablet; } }
 
-/* Container Spacer
-=============================================================================== */
-/**
- * Uncomment to Enable outer paddings for container
- * For small css file try to avoid as many $outerpaddings as possible
- */
-//@todo better naming
-$container--outerpadding:           0;
-//$container--outerpadding--mobile:   $spacer--mobile;
-//$container--outerpadding--tablet:   $spacer--tablet;
-//$container--outerpadding--notebook: $spacer--notebook;
-//$container--outerpadding--desktop:  $spacer--desktop;
-//$container--outerpadding--hd:       $spacer--hd;
+    @include breakpoint($notebook) {
+        @if $container--spacer--notebook != false {
+            padding-left: $container--spacer--notebook;
+            padding-right: $container--spacer--notebook; } }
 
+    @include breakpoint($desktop) {
+        @if $container--spacer--desktop != false {
+            padding-left: $container--spacer--desktop;
+            padding-right: $container--spacer--desktop; } }
 
-/* Container Mixins
-=============================================================================== */
-
+    @include breakpoint($hd) {
+        @if $container--spacer--hd != false {
+            padding-left: $container--spacer--hd;
+            padding-right: $container--spacer--hd; } }
+}
 
 /* Boxed Container
 =========================================================== */
-
 @mixin container {
+    @include container__padding;
     display: flex;
-    flex-flow: wrap;
+    flex-wrap: wrap;
+    flex-direction: row;
     width: 100%;
     max-width: $maxWidth;
     margin: 0 auto;
-
-    @if variable-exists(container--outerpadding) {
-        padding-left: $container--outerpadding;
-        padding-right: $container--outerpadding; }
-
-    @media (min-width: $mobile) {
-        @if variable-exists(container--outerpadding--mobile) {
-            padding-left: $container--outerpadding--mobile;
-            padding-right: $container--outerpadding--mobile; } }
-
-    @media (min-width: $tablet) {
-        @if variable-exists(container--outerpadding--tablet) {
-            padding-left: $container--outerpadding--tablet;
-            padding-right: $container--outerpadding--tablet; } }
-
-    @media (min-width: $notebook) {
-        @if variable-exists(container--outerpadding--notebook) {
-            padding-left: $container--outerpadding--notebook;
-            padding-right: $container--outerpadding--notebook; } }
-
-    @media (min-width: $desktop) {
-        @if variable-exists(container--outerpadding--desktop) {
-            padding-left: $container--outerpadding--desktop;
-            padding-right: $container--outerpadding--desktop; } }
-
-    @media (min-width: $hd) {
-        @if variable-exists(container--outerpadding--hd) {
-            padding-left: $container--outerpadding--hd;
-            padding-right: $container--outerpadding--hd; } }
 }
-
 
 /* Full Width Container
 =========================================================== */
 @mixin container--fluid {
     display: flex;
-    flex-flow: wrap;
-
-    @if variable-exists(container--outerpadding) {
-        padding-left: $container--outerpadding;
-        padding-right: $container--outerpadding; }
-
-    @media (min-width: $mobile) {
-        @if variable-exists(container--outerpadding--mobile) {
-            padding-left: $container--outerpadding--mobile;
-            padding-right: $container--outerpadding--mobile; } }
-
-    @media (min-width: $tablet) {
-        @if variable-exists(container--outerpadding--tablet) {
-            padding-left: $container--outerpadding--tablet;
-            padding-right: $container--outerpadding--tablet; } }
-
-    @media (min-width: $notebook) {
-        @if variable-exists(container--outerpadding--notebook) {
-            padding-left: $container--outerpadding--notebook;
-            padding-right: $container--outerpadding--notebook; } }
-
-    @media (min-width: $desktop) {
-        @if variable-exists(container--outerpadding--desktop) {
-            padding-left: $container--outerpadding--desktop;
-            padding-right: $container--outerpadding--desktop; } }
-
-    @media (min-width: $hd) {
-        @if variable-exists(container--outerpadding--hd) {
-            padding-left: $container--outerpadding--hd;
-            padding-right: $container--outerpadding--hd; } }
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
 }
-
 
 /* Nested Container
 =========================================================== */
-@mixin container--nospace { // @todo ? change to container--nested ???
+@mixin container--nospace {
     display: flex;
-    flex-flow: wrap;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
     max-width: $maxWidth;
+    margin: 0 auto;
 }
-
 
 /* Single Row Container - nowrap - boxed
 =========================================================== */
 @mixin container--row {
     display: flex;
-    flex-flow: nowrap;
-    max-width: $maxWidth;
-
-    @if variable-exists(container--outerpadding) {
-        padding-left: $container--outerpadding;
-        padding-right: $container--outerpadding; }
-
-    @media (min-width: $mobile) {
-        @if variable-exists(container--outerpadding--mobile) {
-            padding-left: $container--outerpadding--mobile;
-            padding-right: $container--outerpadding--mobile; } }
-
-    @media (min-width: $tablet) {
-        @if variable-exists(container--outerpadding--tablet) {
-            padding-left: $container--outerpadding--tablet;
-            padding-right: $container--outerpadding--tablet; } }
-
-    @media (min-width: $notebook) {
-        @if variable-exists(container--outerpadding--notebook) {
-            padding-left: $container--outerpadding--notebook;
-            padding-right: $container--outerpadding--notebook; } }
-
-    @media (min-width: $desktop) {
-        @if variable-exists(container--outerpadding--desktop) {
-            padding-left: $container--outerpadding--desktop;
-            padding-right: $container--outerpadding--desktop; } }
-
-    @media (min-width: $hd) {
-        @if variable-exists($container--outerpadding--hd) {
-            padding-left: $container--outerpadding--hd;
-            padding-right: $container--outerpadding--hd; } }
+    flex-wrap: nowrap;
+    @include container__padding;
 }
 
 
-/* Container with negative Margins @todo not tested
-=========================================================== */
-@mixin container--collapse {
-    display: flex;
-    flex-flow: nowrap;
-    max-width: $maxWidth;
+/* Grid Base Mixins
+=============================================================================== */
+/* BEM Mixins - These Mixins are Are BEM Elements (Block__Element--Modifier */
+@mixin width($grid:12, $grid--max:12) {
+    width: percentage($grid / $grid--max);
+}
+
+
+@mixin padding(){
+    padding: $spacer;
+
+    @if $spacer--mobile != false {
+        @include breakpoint($mobile) {
+            padding: $spacer--mobile; } }
+
+    @if $spacer--tablet != false {
+        @include breakpoint($tablet) {
+            padding: $spacer--tablet;} }
+
+    @if $spacer--notebook != false {
+        @include breakpoint($notebook) {
+            padding: $spacer--notebook;} }
+
+    @if $spacer--desktop != false {
+        @include breakpoint($desktop) {
+            padding: $spacer--desktop;} }
+
+    @if $spacer--hd != false {
+        @include breakpoint($hd) {
+            padding: $spacer--hd;} }
+}
+@mixin padding--default() { // padding left, right and double bottom
+    padding: 0 $spacer 2*$spacer;
+
+    @if $spacer--mobile != false {
+        @include breakpoint($mobile) {
+            padding: 0 $spacer--mobile 2*$spacer--mobile; } }
+
+    @if $spacer--tablet != false {
+        @include breakpoint($tablet) {
+            padding: 0 $spacer--tablet 2*$spacer--tablet;} }
+
+    @if $spacer--notebook != false {
+        @include breakpoint($notebook) {
+            padding: 0 $spacer--notebook 2*$spacer--notebook;} }
+
+    @if $spacer--desktop != false {
+        @include breakpoint($desktop) {
+            padding: 0 $spacer--desktop 2*$spacer--desktop;} }
+
+    @if $spacer--hd != false {
+        @include breakpoint($hd) {
+            padding: 0 $spacer--hd 2*$spacer--hd;} }
+}
+@mixin padding--horizontal(){
+    padding-left: $spacer;
+    padding-right: $spacer;
+
+    @if $spacer--mobile != false {
+        @include breakpoint($mobile) {
+            padding-left: $spacer--mobile;
+            padding-right: $spacer--mobile; } }
+
+    @if $spacer--tablet != false {
+        @include breakpoint($tablet) {
+            padding-left: $spacer--tablet;
+            padding-right: $spacer--tablet; } }
+
+    @if $spacer--notebook != false {
+        @include breakpoint($notebook) {
+            padding-left: $spacer--notebook;
+            padding-right: $spacer--notebook; } }
+
+    @if $spacer--desktop != false {
+        @include breakpoint($desktop) {
+            padding-left: $spacer--desktop;
+            padding-right: $spacer--desktop; } }
+
+    @if $spacer--hd != false {
+        @include breakpoint($hd) {
+            padding-left: $spacer--hd;
+            padding-right: $spacer--hd; } }
+}
+
+@mixin margin() { // margin on all sides
+    margin: $spacer;
+
+    @if $spacer--mobile != false {
+        @include breakpoint($mobile) {
+            margin: $spacer--mobile; } }
+
+    @if $spacer--tablet != false {
+        @include breakpoint($tablet) {
+            margin: $spacer--tablet;} }
+
+    @if $spacer--notebook != false {
+        @include breakpoint($notebook) {
+            margin: $spacer--notebook;} }
+
+    @if $spacer--desktop != false {
+        @include breakpoint($desktop) {
+            margin: $spacer--desktop;} }
+
+    @if $spacer--hd != false {
+        @include breakpoint($hd) {
+            margin: $spacer--hd;} }
+}
+@mixin margin--default() { // margin left, right and double bottom
+    margin: 0 $spacer 2*$spacer;
+
+    @if $spacer--mobile != false {
+        @include breakpoint($mobile) {
+            margin: 0 $spacer--mobile 2*$spacer--mobile; } }
+
+    @if $spacer--tablet != false {
+        @include breakpoint($tablet) {
+            margin: 0 $spacer--tablet 2*$spacer--tablet;} }
+
+
+    @if $spacer--notebook != false {
+        @include breakpoint($notebook) {
+            margin: 0 $spacer--notebook 2*$spacer--notebook;} }
+
+    @if $spacer--desktop != false {
+        @include breakpoint($desktop) {
+            margin: 0 $spacer--desktop 2*$spacer--desktop;} }
+
+    @if $spacer--hd != false {
+        @include breakpoint($hd) {
+            margin: 0 $spacer--hd 2*$spacer--hd;} }
+}
+@mixin margin--horizontal(){
+    margin-left: $spacer;
+    margin-right: $spacer;
+
+    @if $spacer--mobile != false {
+        @include breakpoint($mobile) {
+            margin-left: $spacer--mobile;
+            margin-right: $spacer--mobile; } }
+
+    @if $spacer--tablet != false {
+        @include breakpoint($tablet) {
+            margin-left: $spacer--tablet;
+            margin-right: $spacer--tablet; } }
+
+    @if $spacer--notebook != false {
+        @include breakpoint($notebook) {
+            margin-left: $spacer--notebook;
+            margin-right: $spacer--notebook; } }
+
+    @if $spacer--desktop != false {
+        @include breakpoint($desktop) {
+            margin-left: $spacer--desktop;
+            margin-right: $spacer--desktop; } }
+
+    @if $spacer--hd != false {
+        @include breakpoint($hd) {
+            margin-left: $spacer--hd;
+            margin-right: $spacer--hd; } }
+}
+
+
+/* Standard Grid - Only Horizontal Padding
+=============================================================================== */
+@mixin grid($grid: 12, $grid--max: 12) {
+    @include padding--horizontal;
+    @include width($grid, $grid--max);
+
+
+    @include jacket(ie) {
+        float: left;
+    }
+}
+
+/* Grid without padding - use for nested Grids
+=============================================================================== */
+@mixin grid--nospace($grid: 12, $grid--max: 12) {
+    width: percentage($grid / $grid--max);
+
+    //@include jacket(ie) {
+    //    float: left;
+    //}
+}
+
+/* Grid collapses outer padding --- NOT TESTED
+=============================================================================== */
+@mixin grid--collapse($grid: 12, $grid--max: 12) {
+    width: percentage($grid / $grid--max);
     margin-left: $spacer * -1;
     margin-right: $spacer * -1;
 
-    @if variable-exists(container--outerpadding) {
-        padding-left: $container--outerpadding;
-        padding-right: $container--outerpadding;
-        margin-left: $spacer--mobile * -1;
-        margin-right: $spacer--mobile * -1;}
-
-    @media (min-width: $mobile) {
-        @if variable-exists(container--outerpadding--mobile) {
-            padding-left: $container--outerpadding--mobile;
-            padding-right: $container--outerpadding--mobile;
+    @if $spacer--mobile != false {
+        @include breakpoint($mobile) {
             margin-left: $spacer--mobile * -1;
-            margin-right: $spacer--mobile * -1;} }
+            margin-right: $spacer--mobile * -1; } }
 
-    @media (min-width: $tablet) {
-        @if variable-exists(container--outerpadding--tablet) {
-            padding-left: $container--outerpadding--tablet;
-            padding-right: $container--outerpadding--tablet;
+    @if $spacer--tablet != false {
+        @include breakpoint($tablet) {
             margin-left: $spacer--tablet * -1;
-            margin-right: $spacer--tablet * -1;} }
+            margin-right: $spacer--tablet * -1; } }
 
-    @media (min-width: $notebook) {
-        @if variable-exists(container--outerpadding--notebook) {
-            padding-left: $container--outerpadding--notebook;
-            padding-right: $container--outerpadding--notebook;
+    @if $spacer--notebook != false {
+        @include breakpoint($notebook) {
             margin-left: $spacer--notebook * -1;
-            margin-right: $spacer--notebook * -1;} }
+            margin-right: $spacer--notebook * -1; } }
 
-    @media (min-width: $desktop) {
-        @if variable-exists($container--outerpadding--desktop) {
-            padding-left: $container--outerpadding--desktop;
-            padding-right: $container--outerpadding--desktop;
+    @if $spacer--desktop != false {
+        @include breakpoint($desktop) {
             margin-left: $spacer--desktop * -1;
             margin-right: $spacer--desktop * -1; } }
 
-    @media (min-width: $hd) {
-        @if variable-exists(container--outerpadding--hd) {
-            padding-left: $container--outerpadding--hd;
-            padding-right: $container--outerpadding--hd;
+    @if $spacer--hd != false {
+        @include breakpoint($hd) {
             margin-left: $spacer--hd * -1;
             margin-right: $spacer--hd * -1; } }
 }
 
 
-/* Grid mixins
-    - use for nested Grids and for width Overrides in special Breakpoints when
-      you use multiple $spacers ($spacer--mobile, $spacer--desktop)
+/* Card Mixin
 =============================================================================== */
-
-/* BEM Mixins - These Mixins are Are BEM Elements (Block__Element--Modifier */
-@mixin width($grid:12, $grid--max:12) {
-    width: percentage($grid / $grid--max);
+@mixin card__width($grid:6, $grid--max:12) {
+    width: calc(#{percentage($grid / $grid--max)} - 2 * #{get_spacer()});
 }
-@mixin padding(){
-    padding: $spacer;
+@mixin card($grid: 6, $grid--max: 12) {
+    @include margin--default();
+    @include padding;
+    @include width($grid, $grid--max);
 
-    @if variable-exists(spacer--mobile) {
-        @media (min-width: $mobile) {
-            padding: $spacer--mobile; } }
 
-    @if variable-exists(spacer--tablet) {
-        @media (min-width: $tablet) {
-            padding: $spacer--tablet;} }
-
-    @if variable-exists(spacer--notebook) {
-        @media (min-width: $notebook) {
-            padding: $spacer--notebook;} }
-
-    @if variable-exists(spacer--desktop) {
-        @media (min-width: $desktop) {
-            padding: $spacer--desktop;} }
-
-    @if variable-exists(spacer--hd) {
-        @media (min-width: $hd) {
-            padding: $spacer--hd;} }
+    //@include jacket(ie) { // IE9 fallback
+    //    float: left;
+    //}
 }
 
-/* @todo - single grid mixins for custom grids */
-@mixin padding--horizontal(){}
-@mixin padding--vertical(){}
-@mixin padding--bottom(){}
-@mixin margin(){}
-@mixin margin--horizontal(){}
-@mixin margin--vertical(){}
-@mixin margin--collapse(){}
-@mixin margin--bottom(){}
 
-
-/* Grid Boxes
+/* CLEARFIX Mixin
 =============================================================================== */
-@mixin grid($grid:12, $grid--max:12) {
-    @include width();
-    @include padding();
+// Replace all clearfix Classes with this mixin for IE9 and lower
+// Most clearfixes will be removed for modern Browsers soon.
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 
-/* Cards - Grids with margins (and borders)
-    - via _settings.scss: (margin-left, margin-right, padding)
-    - change manually: (background, border, margin-bottom
+/* STANDARD CLASSES
 =============================================================================== */
-
-@mixin card__width($grid:12, $grid--max:12) {
-    width: calc(#{percentage($grid / $grid--max)} - 2 * #{$spacer}); // IE9+
-    @media (min-width: $mobile) {
-        @if variable-exists(spacer--mobile) {
-            width: calc(#{percentage($grid / $grid--max)} - 2 * #{$spacer--mobile}); } }
-
-    @media (min-width: $tablet) {
-        @if variable-exists(spacer--tablet) {
-            width: calc(#{percentage($grid / $grid--max)} - 2 * #{$spacer--tablet}); } }
-
-    @media (min-width: $notebook) {
-        @if variable-exists(spacer--notebook) {
-            width: calc(#{percentage($grid / $grid--max)} - 2 * #{$spacer--notebook}); } }
-
-    @media (min-width: $desktop) {
-        @if variable-exists(spacer--desktop) {
-            width: calc(#{percentage($grid / $grid--max)} - 2 * #{$spacer--desktop}); } }
-
-    @media (min-width: $hd) {
-        @if variable-exists(spacer--hd) {
-            width: calc(#{percentage($grid / $grid--max)} - 2 * #{$spacer--hd}); } }
-}
+//
 
 
-@mixin card__margin() {
-    margin-left: $spacer;
-    margin-right: $spacer;
-
-    @media (min-width: $mobile) {
-        @if variable-exists(spacer--mobile) {
-            margin-left: $spacer--mobile;
-            margin-right: $spacer--mobile; } }
-
-    @media (min-width: $tablet) {
-        @if variable-exists(spacer--tablet) {
-            margin-left: $spacer--tablet;
-            margin-right: $spacer--tablet; } }
-
-    @media (min-width: $notebook) {
-        @if variable-exists(spacer--notebook) {
-            margin-left: $spacer--notebook;
-            margin-right: $spacer--notebook; } }
-
-    @media (min-width: $desktop) {
-        @if variable-exists(spacer--desktop) {
-            margin-left: $spacer--desktop;
-            margin-right: $spacer--desktop; } }
-
-    @media (min-width: $hd) {
-        @if variable-exists(spacer--hd) {
-            margin-left: $spacer--hd;
-            margin-right: $spacer--hd; } }
-
-}
-
-@mixin card($grid:12, $grid--max:12) {
-    @include card__width($grid, $grid--max);
-    @include card__margin();
-    @include padding();
-}
