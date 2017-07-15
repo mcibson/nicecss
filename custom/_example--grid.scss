@@ -1,0 +1,40 @@
+.container--example-1 {
+  @include container;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+.grid--example-1 {
+  @include grid(12,$s:6,$m:4,$l:3);
+}
+
+.container--example-2 {
+  @include container;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+.card--example-2 {
+  @include card(6,$s:6,$m:4,$l:3);
+  background: #fff;
+  color: #333;
+}
+
+.container--example-3 {
+  @include container;
+}
+
+.sidebar {
+  @include grid--nospace(12,$m:3);
+  @include breakpoint($media--m) {
+    order: -1;
+  }
+}
+.menu--categories {
+  @include card(12);
+  background: #fff;
+}
+
+.content {
+  @include card--nospace(12,$m:9);
+  background: #fff;
+}
+

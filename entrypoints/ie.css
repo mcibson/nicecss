@@ -1,0 +1,333 @@
+/* Styles.scss - Starting point for css */
+/* include a entrypoint.css file into your html */
+/* Vendor / Plugins / External Code
+=============================================================================== */
+/* Base Styles
+=============================================================================== */
+/* Font Settings */
+/* ============================================================================
+   NICE GRID
+=============================================================================== */
+/* Don't use Flex Shorthands as long as you support IE10 */
+/* Breakpoints
+=============================================================================== */
+/* Spacer - Gutter - Standard Paddings and Margins for the Grid
+=============================================================================== */
+/* Outer Spacer -- Padding on boxed Container
+=============================================================================== */
+/* Helper Functions
+=============================================================================== */
+/* Containers
+=============================================================================== */
+/* Container Base Mixins
+========================== */
+/* Boxed Container
+==================== */
+/* Full Width Container
+========================= */
+/* Nested Container
+===================== */
+/* Single Row Container - nowrap - boxed
+========================================== */
+/* Grid Base Mixins
+=============================================================================== */
+/* Standard Grid - Only Horizontal Padding
+=============================================================================== */
+/* Grid without padding - use for nested Grids
+=============================================================================== */
+/* Grid collapses outer padding --- todo NOT TESTED
+=============================================================================== */
+/* Card Mixin
+=============================================================================== */
+/* CLEARFIX
+=============================================================================== */
+/* STANDARD CLASSES
+=============================================================================== */
+/* BASE.SCSS
+============================================================================
+
+Style Standard HTML Elements here (ie body, html, h1, h2, h3, h4
+
+Form Elements are designed in base/_forms.scss
+Font Elements are designed in base/_fonts.scss
+
+If you want to use normalize.css or reset.css include it here and change them
+to your needs
+
+
+=============================================================================== */
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  font-family: arial, sans-serif;
+  color: #444;
+  margin: 0;
+  padding: 0;
+  background: #333;
+  padding-top: 5px; }
+
+h1, h2, h3, h4, h5, h6, ul {
+  margin: 0 0 1rem; }
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside; }
+
+/* Font Variables and Element Mixins */
+.section__title {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+  float: left;
+  color: #fff; }
+  @media (min-width: 481px) {
+    .section__title {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.headline {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+  float: left;
+  font-size: 1.444rem; }
+  @media (min-width: 481px) {
+    .headline {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.headline--ordertop {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+  float: left;
+  order: -100;
+  font-size: 1.444rem; }
+  @media (min-width: 481px) {
+    .headline--ordertop {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.card__headline {
+  margin: 0 5px 10px;
+  padding: 5px;
+  width: calc(100% - 10px);
+  float: left;
+  font-size: 1.444rem; }
+  @media (min-width: 481px) {
+    .card__headline {
+      margin: 0 1rem 2rem; } }
+  @media (min-width: 481px) {
+    .card__headline {
+      padding: 1rem; } }
+  @media (min-width: 481px) {
+    .card__headline {
+      width: calc(100% - 2rem); } }
+
+/* Components
+=============================================================================== */
+.main__header {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #fff; }
+  @media (min-width: 481px) {
+    .main__header {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.main__title {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+  float: left; }
+  @media (min-width: 481px) {
+    .main__title {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.main__subtitle {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+  float: left; }
+  @media (min-width: 481px) {
+    .main__subtitle {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.captain__wrap {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; }
+  @media (min-width: 481px) {
+    .captain__wrap {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.captain {
+  margin: 0 5px 10px;
+  padding: 5px;
+  width: calc(50% - 10px);
+  float: left;
+  background: #fff; }
+  @media (min-width: 481px) {
+    .captain {
+      margin: 0 1rem 2rem; } }
+  @media (min-width: 481px) {
+    .captain {
+      padding: 1rem; } }
+  @media (min-width: 481px) {
+    .captain {
+      width: calc(50% - 2rem); } }
+
+/* Custom - Examples
+=============================================================================== */
+.container--example-1 {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  color: #fff; }
+  @media (min-width: 481px) {
+    .container--example-1 {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.grid--example-1 {
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 100%;
+  float: left; }
+  @media (min-width: 481px) {
+    .grid--example-1 {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+  @media (min-width: 481px) {
+    .grid--example-1 {
+      width: 50%; } }
+  @media (min-width: 769px) {
+    .grid--example-1 {
+      width: 33.33333%; } }
+  @media (min-width: 1025px) {
+    .grid--example-1 {
+      width: 25%; } }
+
+.container--example-2 {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  color: #fff; }
+  @media (min-width: 481px) {
+    .container--example-2 {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.card--example-2 {
+  margin: 0 5px 10px;
+  padding: 5px;
+  width: calc(50% - 10px);
+  float: left;
+  background: #fff;
+  color: #333; }
+  @media (min-width: 481px) {
+    .card--example-2 {
+      margin: 0 1rem 2rem; } }
+  @media (min-width: 481px) {
+    .card--example-2 {
+      padding: 1rem; } }
+  @media (min-width: 481px) {
+    .card--example-2 {
+      width: calc(50% - 2rem); } }
+  @media (min-width: 769px) {
+    .card--example-2 {
+      width: calc(33.33333% - 2rem); } }
+  @media (min-width: 1025px) {
+    .card--example-2 {
+      width: calc(25% - 2rem); } }
+
+.container--example-3 {
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; }
+  @media (min-width: 481px) {
+    .container--example-3 {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+
+.sidebar {
+  width: 100%;
+  float: left; }
+  @media (min-width: 769px) {
+    .sidebar {
+      width: 25%; } }
+  @media (min-width: 769px) {
+    .sidebar {
+      order: -1; } }
+
+.menu--categories {
+  margin: 0 5px 10px;
+  padding: 5px;
+  width: calc(100% - 10px);
+  float: left;
+  background: #fff; }
+  @media (min-width: 481px) {
+    .menu--categories {
+      margin: 0 1rem 2rem; } }
+  @media (min-width: 481px) {
+    .menu--categories {
+      padding: 1rem; } }
+  @media (min-width: 481px) {
+    .menu--categories {
+      width: calc(100% - 2rem); } }
+
+.content {
+  margin: 0 5px 10px;
+  width: calc(100% - 10px);
+  float: left;
+  background: #fff; }
+  @media (min-width: 481px) {
+    .content {
+      margin: 0 1rem 2rem; } }
+  @media (min-width: 481px) {
+    .content {
+      width: calc(100% - 2rem); } }
+  @media (min-width: 769px) {
+    .content {
+      width: calc(75% - 2rem); } }
+
+/* Helpers - Keep these @imports on Bottom of this File
+=============================================================================== */
+
+/*# sourceMappingURL=ie.css.map */

@@ -16,6 +16,15 @@ $title--xs:   $title--s   / $title--ratio;
   color: #fff;
 }
 .headline {
-  margin: 0;
+  @include grid(12);
+  font-size: $title--l;
+}
+.headline--ordertop {
+  @include grid(12);
+  order: -100;
+  font-size: $title--l;
+}
+.card__headline {
+  @include card(12);
   font-size: $title--l;
 }
