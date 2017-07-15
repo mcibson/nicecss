@@ -6,16 +6,7 @@
 /* Don't use Flex Shorthands as long as you support IE10 */
 
 
-$maxWidth: 1200px;
-$gridmap: (
-    // breakpoint ( width, $spacer, $outerspacer )
-    default:    (   1px,  5px,  5px),    // default is mobile first
-    media--s:   ( 481px,  1rem,  1rem),
-    media--m:   ( 769px,  false, false),
-    media--l:   (1025px,  false, false),
-    media--xl:  (1201px,  false, false),
-    media--xxl: (1601px,  false, false)
-);
+
 
 /* Breakpoints
 =============================================================================== */

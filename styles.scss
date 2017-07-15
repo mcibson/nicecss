@@ -2,6 +2,11 @@
 
 /* include a entrypoint.css file into your html */
 
+/* Settings
+=============================================================================== */
+@import "settings.scss";
+
+
 /* Vendor / Plugins / External Code
 =============================================================================== */
 @import "vendor/jacket";
@@ -26,7 +31,6 @@
 /* Custom - Examples
 =============================================================================== */
 @import "custom/example--grid";
-
 
 
 /* Helpers - Keep these @imports on Bottom of this File

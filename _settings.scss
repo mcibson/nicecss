@@ -1,0 +1,24 @@
+/* ============================================================================
+   SETTINGS.SCSS
+=============================================================================== */
+
+/* NICEGRID
+=============================================================================== */
+$maxWidth: 1200px;
+$gridmap: (
+ // breakpoint: ($width, $spacer, $outerspacer )
+    default:    (   1px,     5px,   5px),    // default is mobile first
+    media--s:   ( 481px,    1rem,  1rem),
+    media--m:   ( 769px,   false, false),
+    media--l:   (1025px,   false, false),
+    media--xl:  (1201px,   false, false),
+    media--xxl: (1601px,   false, false)
+);
+
+/* Fonts todo better naming
+=============================================================================== */
+$font__family: arial, sans-serif;
+$font__color: #444;
+
+$font__family--headline: $font__family;
+$font__color--headline: $font__color;
