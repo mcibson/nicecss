@@ -12,7 +12,7 @@
 
 </header>
 <nav></nav>
-<main class="main">
+<section class="main">
     <header class="main__header">
         <h1 class="main__title">NiceCSS</h1>
         <h2 class="main__subtitle">A CSS Framework/Blueprint/Method which scales with your Requirements</h2>
@@ -106,12 +106,9 @@ $title--xs: $title--s / $title--ratio;
     </section>
 
 
-</main>
+</section>
 <section class="container--example-1">
     <h2 class="headline">Grid Example</h2>
-    <article class="grid--example-1">
-        <h3>@include grid(12, $s:6, $m:4, $l:3)</h3>
-    </article>
     <article class="grid--example-1">
         <h3>@include grid(12, $s:6, $m:4, $l:3)</h3>
     </article>
@@ -151,30 +148,86 @@ $title--xs: $title--s / $title--ratio;
     <article class="card--example-2">
         <h3>@include card(12, $s:6, $m:4, $l:3)</h3>
     </article>
-    <article class="card--example-2">
-        <h3>@include card(12, $s:6, $m:4, $l:3)</h3>
-    </article>
 </section>
-<section class="container--example-3">
+<main class="container--example-3">
     <h2 class="headline--ordertop">Sidebar and Content</h2>
+    <section class="content highlights--example-3">
+        <h3 class="card__headline">Grid Settings</h3>
+            <article class="docu--example-3">
+                <h4>Grid Settings Map</h4>
+                <p class="teaser">All Grid Settings are done here</p>
+            <code>
+              <pre>
+$maxWidth: 1200px;
+$gridmap: (
+ // breakpoint: ($width, $spacer, $outerspacer )
+    default:    (   1px,     5px,   5px), //        Mobile             // $mobile
+    media--xs:  ( 320px,    1rem,  1rem), //  20rem Mobile Landscape   // $mobland
+    media--s:   ( 480px,    1rem,  1rem), //  30rem Mobile Landscape   // $mobland
+    media--m:   ( 768px,   false, false), //  48rem Tablet             // $tablet
+    media--l:   (1024px,   false, false), //  64rem Tablet Landscape   // $tabland
+    media--xl:  (1200px,   false, false), //  75rem Notebook           // $notebook
+    media--xxl: (1600px,   false, false)  // 100rem Desktop            // $desktop
+);
+              </pre>
+            </code>
+                <p class="message--warning"><strong>@todo:</strong> Make names and amount of breakpoints changeable (epic)</p>
 
-    <article class="content">
-        <section class="highlights--example-3">
-            <h3 class="card__headline">The Main Content of this Section</h3>
-            <article class="highlight">
-                <h4>Title</h4>
-                <p>Lorem Ipsum Dolor sit al met</p>
             </article>
-            <article class="highlight">
-                <h4>Title</h4>
-                <p>Lorem Ipsum Dolor sit al met</p>
+            <article class="docu--example-3">
+                <h4>Grid Variables</h4>
+                <code>
+                    <pre>
+/* Breakpoints
+=============================================================================== */
+$media--s:    nth(map-get($gridmap, media--s),   1);     // mobile landscape
+$media--m:    nth(map-get($gridmap, media--m),   1);     // tablet portrait
+$media--l:    nth(map-get($gridmap, media--l),   1);     // notebook, netbook, tablet landscape
+$media--xl:   nth(map-get($gridmap, media--xl),  1);     // desktop
+$media--xxl:  nth(map-get($gridmap, media--xxl), 1);     // HD+
+
+
+/* Spacer - Gutter - Standard Paddings and Margins for the Grid
+=============================================================================== */
+$spacer:      nth(map-get($gridmap, default),    2);
+$spacer--s:   nth(map-get($gridmap, media--s),   2);
+$spacer--m:   nth(map-get($gridmap, media--m),   2);
+$spacer--l:   nth(map-get($gridmap, media--l),   2);
+$spacer--xl:  nth(map-get($gridmap, media--xl),  2);
+$spacer--xxl: nth(map-get($gridmap, media--xxl), 2);
+
+
+/* Outer Spacer -- Padding on boxed Container
+=============================================================================== */
+$outer:       nth(map-get($gridmap, default),    3);
+$outer--s:    nth(map-get($gridmap, media--s),   3);
+$outer--m:    nth(map-get($gridmap, media--m),   3);
+$outer--l:    nth(map-get($gridmap, media--l),   3);
+$outer--xl:   nth(map-get($gridmap, media--xl),  3);
+$outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
+                    </pre>
+                </code>
+                <p class="message--warning"><strong>@todo:</strong> Customize Grid and Card Paddings / Margins </p>
             </article>
-            <article class="highlight">
-                <h4>Title</h4>
-                <p>Lorem Ipsum Dolor sit al met</p>
+            <article class="docu--example-3">
+                <h4>Grid @mixins</h4>
+                <ul>
+                    <li>@mixin width</li>
+                    <li>@mixin width--card</li>
+                </ul>
+                <ul>
+                    <li>@mixin padding</li>
+                    <li>@mixin padding--default</li>
+                    <li>@mixin padding--horizontal</li>
+                </ul>
+                <ul>
+                    <li>@mixin margin</li>
+                    <li>@mixin margin--default</li>
+                    <li>@mixin margin--horizontal</li>
+                </ul>
+                <p class="message--warning"><stong>@todo:</stong> Add margin(top and padding mixins with $arguments</p>
             </article>
-        </section>
-    </article>
+    </section>
     <aside class="sidebar">
         <ul class="menu--categories">
             <li><a href="#">menuitem</a></li>
@@ -185,7 +238,7 @@ $title--xs: $title--s / $title--ratio;
             <li><a href="#">menuitem</a></li>
         </ul>
     </aside>
-</section>
+</main>
 <footer>
 
 </footer>

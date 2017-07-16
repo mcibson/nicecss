@@ -3,15 +3,9 @@
     @include container;
   }
   .highlight {
-    @include card(12);
+    @include card--default(12, $s:6, $m:4);
     background: #fff;
     margin-bottom: 2*$spacer;
-    @media (min-width: $media--s) {
-      @include card__width(6);
-    }
-    @media (min-width: $media--m) {
-      @include card__width(4)
-    }
   }
   .something_else {
     background: red;

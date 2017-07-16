@@ -5,9 +5,6 @@
 
 /* Don't use Flex Shorthands as long as you support IE10 */
 
-
-
-
 /* Breakpoints
 =============================================================================== */
 $media--s:    nth(map-get($gridmap, media--s),   1);     // mobile landscape
@@ -37,25 +34,6 @@ $outer--xl:   nth(map-get($gridmap, media--xl),  3);
 $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
 
 
-// The Magic Fucntion - Get $spacer from active Breakpoint
-// We won't need it
-//@import "../mixin/stringToNumberConverter/stringToNumber";
-//@function get_spacer() {
-//    $spacing: $spacer; // Default Spacer
-//    // Check if min-width is set
-//    @if breakpoint-get-context('min-width') {
-//        // Convert breakpoint list value to string to number with unit
-//        $breakpoint_value: to-number( inspect( breakpoint-get-context('min-width') ) );
-//
-//        // Loop through $breakpointsmap
-//        @each $breakpoint, $value in $gridmap {
-//            @if ( $breakpoint_value >=  nth($value,1) )  {
-//                $spacing: nth($value,2);
-//            }
-//        }
-//    }
-//    @return $spacing;
-//}
 /* Helper Functions
 =============================================================================== */
 @function get_card_spacer_for($breakpoint) {
@@ -78,7 +56,6 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
 
     @return $target;
 }
-
 
 
 /* Containers
@@ -118,8 +95,7 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
 }
 
 
-/* Boxed Container
-==================== */
+/* Boxed Container */
 @mixin container {
     @include container__padding;
     display: flex;
@@ -130,9 +106,7 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
     margin: 0 auto;
 }
 
-
-/* Full Width Container
-========================= */
+/* Full Width Container */
 @mixin container--fluid {
     display: flex;
     flex-wrap: wrap;
@@ -141,9 +115,7 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
     margin: 0 auto;
 }
 
-
-/* Nested Container
-===================== */
+/* Nested Container */
 @mixin container--nospace {
     display: flex;
     flex-wrap: wrap;
@@ -153,20 +125,17 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
     margin: 0 auto;
 }
 
-
-/* Single Row Container - nowrap - boxed
-========================================== */
+/* Single Row Container - nowrap - boxed  */
 @mixin container--row {
+    @include container__padding;
     display: flex;
     flex-wrap: nowrap;
-    @include container__padding;
 }
-
 
 
 /* Grid Base Mixins
 =============================================================================== */
-@mixin width($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+@mixin width        ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
     width: percentage($default / $cols);
     @if $s != false {
         @include breakpoint($media--s) {
@@ -214,7 +183,7 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
         }
     }
 }
-@mixin card__width($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+@mixin width--card  ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
 
     width: calc(#{percentage($default / $cols)} - #{2 * $spacer});
 
@@ -351,28 +320,66 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
     }
 }
 
-@mixin padding(){
-    padding: $spacer;
+@mixin padding($top:false, $right: false, $bottom: false, $left: false){
+    // if custom value in Padding
+    @if $top != false or false != false or false != false or $left != false {
+        @if $top == false {
+            $top: 0;
+        }
+        @if $right == false {
+            $right: 0;
+        }
+        @if $bottom == false {
+            $bottom: 0;
+        }
+        @if $left == false {
+            $left: 0;
+        }
+        padding: $top*$spacer $right*$spacer $bottom*$spacer $left*$spacer;
+        @if $spacer--s != false {
+            @include breakpoint($media--s) {
+                padding: $top*$spacer--s $right*$spacer--s $bottom*$spacer--s $left*$spacer--s; } }
 
-    @if $spacer--s != false {
-        @include breakpoint($media--s) {
-            padding: $spacer--s; } }
+        @if $spacer--m != false {
+            @include breakpoint($media--m) {
+                padding: $top*$spacer--m $right*$spacer--m $bottom*$spacer--m $left*$spacer--m; } }
 
-    @if $spacer--m != false {
-        @include breakpoint($media--m) {
-            padding: $spacer--m;} }
+        @if $spacer--l != false {
+            @include breakpoint($media--l) {
+                padding: $top*$spacer--l $right*$spacer--l $bottom*$spacer--l $left*$spacer--l;} }
 
-    @if $spacer--l != false {
-        @include breakpoint($media--l) {
-            padding: $spacer--l;} }
+        @if $spacer--xl != false {
+            @include breakpoint($media--xl) {
+                padding: $top*$spacer--xl $right*$spacer--xl $bottom*$spacer--xl $left*$spacer--xl;} }
 
-    @if $spacer--xl != false {
-        @include breakpoint($media--xl) {
-            padding: $spacer--xl;} }
+        @if $spacer--xxl != false {
+            @include breakpoint($media--xxl) {
+                padding: $top*$spacer--xxl $right*$spacer--xxl $bottom*$spacer--xxl $left*$spacer--xxl; } }
 
-    @if $spacer--xxl != false {
-        @include breakpoint($media--xxl) {
-            padding: $spacer--xxl;} }
+    } @else {
+        // if default (false)
+        padding: $spacer;
+
+        @if $spacer--s != false {
+            @include breakpoint($media--s) {
+                padding: $spacer--s; } }
+
+        @if $spacer--m != false {
+            @include breakpoint($media--m) {
+                padding: $spacer--m;} }
+
+        @if $spacer--l != false {
+            @include breakpoint($media--l) {
+                padding: $spacer--l;} }
+
+        @if $spacer--xl != false {
+            @include breakpoint($media--xl) {
+                padding: $spacer--xl;} }
+
+        @if $spacer--xxl != false {
+            @include breakpoint($media--xxl) {
+                padding: $spacer--xxl;} }
+    }
 }
 @mixin padding--default() { // padding left, right and double bottom
     padding: 0 $spacer 2*$spacer;
@@ -504,25 +511,28 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
 }
 
 
-/* Standard Grid - Only Horizontal Padding
+/* GRIDS -- Padding -- no margin - don't use backgrounds and/or borders if not fluid
 =============================================================================== */
-@mixin grid($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+@mixin grid            ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+    @include padding;
+    @include width($default, $s, $m, $l, $xl, $xxl, $cols );
+    @include jacket(ie) { float: left; }
+}
+@mixin grid--default   ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+    @include padding--default;
+    @include width($default, $s, $m, $l, $xl, $xxl, $cols );
+    @include jacket(ie) { float: left; }
+}
+@mixin grid--horizontal($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
     @include padding--horizontal;
     @include width($default, $s, $m, $l, $xl, $xxl, $cols );
     @include jacket(ie) { float: left; }
 }
-
-
-/* Grid without padding - use for nested Grids
-=============================================================================== */
-@mixin grid--nospace($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+@mixin grid--nospace   ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
     @include width($default, $s, $m, $l, $xl, $xxl, $cols );
     @include jacket(ie) { float: left; }
 }
-
-
-/* Grid collapses outer padding --- todo NOT TESTED
-=============================================================================== */
+/* Grid collapses outer padding --- todo NOT TESTED */
 @mixin grid--collapse($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
     @include width($default, $s, $m, $l, $xl, $xxl, $cols );
     margin-left: $spacer * -1;
@@ -555,20 +565,38 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
 }
 
 
-/* Card Mixin
+/* CARDS -- Margin & Padding-- use for Cards, Backgrounds, Borders
 =============================================================================== */
-@mixin card($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
-    @include margin--default();
+@mixin card             ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+    @include margin();
     @include padding;
-    @include card__width($default, $s, $m, $l, $xl, $xxl, $cols);
+    @include width--card($default, $s, $m, $l, $xl, $xxl, $cols);
 
     @include jacket(ie) { // IE9 fallback
         float: left;
     }
 }
-@mixin card--nospace($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+@mixin card--default    ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
     @include margin--default();
-    @include card__width($default, $s, $m, $l, $xl, $xxl, $cols);
+    @include padding();
+    @include width--card($default, $s, $m, $l, $xl, $xxl, $cols);
+
+    @include jacket(ie) { // IE9 fallback
+        float: left;
+    }
+}
+@mixin card--horizontal ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+    @include margin--horizontal();
+    @include padding();
+    @include width--card($default, $s, $m, $l, $xl, $xxl, $cols);
+
+    @include jacket(ie) { // IE9 fallback
+        float: left;
+    }
+}
+@mixin card--nospace    ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
+    @include margin--horizontal();
+    @include width--card($default, $s, $m, $l, $xl, $xxl, $cols);
 
     @include jacket(ie) { // IE9 fallback
         float: left;

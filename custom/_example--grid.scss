@@ -4,7 +4,7 @@
   color: #fff;
 }
 .grid--example-1 {
-  @include grid(12,$s:6,$m:4,$l:3);
+  @include grid(12,$s:6,$m:4,$l:4);
 }
 
 .container--example-2 {
@@ -13,7 +13,7 @@
   color: #fff;
 }
 .card--example-2 {
-  @include card(6,$s:6,$m:4,$l:3);
+  @include card--default(12,$s:6,$m:4,$l:4);
   background: #fff;
   color: #333;
 }
@@ -23,14 +23,14 @@
 }
 
 .sidebar {
-  @include grid--nospace(12,$m:3);
+  @include card--horizontal(12,$m:3);
+  background: #fff;
   @include breakpoint($media--m) {
     order: -1;
   }
 }
 .menu--categories {
-  @include card(12);
-  background: #fff;
+  @include grid(12);
 }
 
 .content {
@@ -38,3 +38,6 @@
   background: #fff;
 }
 
+.docu--example-3 {
+  @include card--default(12)
+}
