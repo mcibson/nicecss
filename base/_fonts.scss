@@ -1,23 +1,49 @@
 /* Font Variables and Element Mixins */
-$title: 1rem;
-$title--ratio: 1.444;
+$title--s: 1rem;
+$title--ratio: 1.414;
 
-$title--m:    $title                     ;  // default:$title--m == $title
-$title--l:    $title      * $title--ratio;
-$title--xl:   $title--l   * $title--ratio;
-$title--xxl:  $title--xl  * $title--ratio;
-$title--s:    $title      / $title--ratio;
-$title--xs:   $title--s   / $title--ratio;
+$title--xxl: 3.998rem;
+$title--xl: 2.827rem;
+$title--l: 1.999rem;
+$title--m: 1.414rem;
+$title: $title--m;
+$title--s: 1rem;
 
+h1 {
+  font-size: $title--xl;
+}
+h2 {
+  font-size: $title--l;
+}
+h3 {
+  font-size: $title;
+}
+h4, h5, h6 {
+  font-size: $title--s;
+}
+h1, h2, h3  {
+  margin: 0 0 1rem 0;
+}
+ h4, h5, h6 {
+  margin: .5rem 0 1rem 0;
+}
 
-
+.title {
+  font-size: $title--m;
+}
 .section__title {
   @include grid(12);
-  color: #fff;
+  font-size: $title--l;
+
 }
 .headline {
-  @include grid(12);
-  font-size: $title--l;
+  @include padding--horizontal();
+  @include margin--horizontal();
+  margin: 0 auto $container__margin-bottom;
+  width: 100%;
+  max-width: $maxWidth;
+  font-size: $title--xl;
+  background: #fff;
 }
 .headline--ordertop {
   @include grid(12);
@@ -26,6 +52,10 @@ $title--xs:   $title--s   / $title--ratio;
 }
 .card__headline {
   @include card(12);
+  font-size: $title--l;
+}
+.card__headline--default {
+  @include card--default();
   font-size: $title--l;
 }
 

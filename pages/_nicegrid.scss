@@ -1,0 +1,31 @@
+.nicegrid .main {
+  padding-top: 1rem;
+}
+.documentation {
+  @include container;
+}
+.docu {
+  @include grid(12, $m:6, $l:4);
+}
+.grid--12 {
+  @include grid(12);
+}
+
+.posts {
+  @include container;
+}
+.post {
+  @include grid(12,  $s:6, $m:4 );
+}
+.post--card {
+  @include card(12, $s:6, $m:4);
+}
+.post--card--default {
+  @include card--default(12, $s:6, $m:4);
+}
+.border--orange {
+  border: 1px solid $orange;
+}
+.border--blue {
+  border: 1px solid $blue;
+}

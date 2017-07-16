@@ -1,0 +1,14 @@
+.nav {
+  @include container;
+}
+.nav__list {
+  @include grid(12);
+  display: flex;
+  list-style: none;
+}
+.nav__link {
+  margin-right: 2rem;
+  color: $nav__link__color;
+  text-decoration: none;
+  text-transform: uppercase;
+}

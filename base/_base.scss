@@ -21,22 +21,23 @@ html {
 }
 
 body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
   font-family: $font__family;
-  color: $font__color;
   margin: 0;
   padding: 0;
-
-  // Custom
-  background: #333;
-  padding-top: $spacer;
-}
-
-h1, h2, h3, h4, h5, h6, ul {
-  margin: 0;
 }
 
 ul {
-  margin: 0;
+  margin: 0 0 1rem 0;
   padding: 0;
   list-style-position: inside;
+}
+p {
+  margin: 0 0 1rem 0;
+}
+pre {
+  margin: 0;
+  height: 100%;
 }

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="entrypoints/default.css">
+    <title>Document</title>
+</head>
+<body class="nicegrid light">
+<header>
+
+</header>
+<nav class="nav">
+    <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Home</a></li>
+        <li><a class="nav__link" href="nicegrid.html">Nice Grid</a></li>
+    </ul>
+</nav>
+<h1 class="headline">Nicegrid - Documentation </h1>
+<section class="documentation grids">
+    <h2 class="section__title">Basic Example</h2>
+    <article class="commander">
+        <h3>@mixin container();</h3>
+        <ul>
+            <li>@include container__padding;</li>
+            <li>display:flex;</li>
+            <li>flex-wrap: wrap;</li>
+            <li>flex-direction: row;</li>
+            <li>width: 100%;</li>
+            <li>max-width: $maxWidth;</li>
+            <li>margin: 0 auto $container__margin-bottom;</li>
+        </ul>
+        <h4>Boxed Container</h4>
+        <p>enable $outer to add outer paddings to the container</p>
+    </article>
+    <article class="commander">
+        <h3>@mixin grid();</h3>
+        <ul>
+            <li>@include padding;</li>
+            <li>@include width($default, $s, $m, $l, $xl, $xxl, $cols );</li>
+            <li>@include jacket(ie) { float: left; }</li>
+        </ul>
+        <h4>Boxed Container</h4>
+        <p>enable $outer to add outer paddings to the container</p>
+    </article>
+    <article class="commander">
+            <pre class="dark padding">
+// Code Example:
+
+.posts {
+    @include container();
+}
+.post {
+    @include grid(12, $m:6; $s:4);
+}</pre>
+    </article>
+    <article class="commander">
+            <pre class="dark padding">
+// Output:
+
+.posts {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 1rem;
+}
+
+.post {
+    padding: 1rem;
+    width: 100%;
+    @media (min-width: 480) {
+        width: 50%;
+    }
+    @media (min-width: 768px) {
+        width: 33.33333%;
+    }
+}</pre>
+    </article>
+</section>
+<section class="posts border--blue">
+    .posts wrapper
+    <h2 class="section__title border--orange">.section__title</h2>
+    <article class="post border--orange">.post</article>
+    <article class="post border--orange">.post</article>
+    <article class="post border--orange">.post</article>
+    <article class="post border--orange">.post</article>
+</section>
+
+<section class="documentation cards">
+    <h2 class="section__title">Basic Card Example</h2>
+    <article class="commander">
+        <h3>@mixin card();</h3>
+        <ul>
+            <li>@include margin()</li>
+            <li>@include padding;</li>
+            <li>@include width--card($default, $s, $m, $l, $xl, $xxl, $cols);</li>
+            <li>@include jacket(ie) { float: left; }</li>
+        </ul>
+        <h4>Basic Card width paddings and margins around</h4>
+        <p>IE9+ - uses calc() to get the width</p>
+    </article>
+    <article class="commander">
+        <h3>@mixin card--default();</h3>
+        <ul>
+            <li>@include margin--default()</li>
+            <li>@include padding;</li>
+            <li>@include width--card($default, $s, $m, $l, $xl, $xxl, $cols);</li>
+            <li>@include jacket(ie) { float: left; }</li>
+        </ul>
+        <h4>margin--default</h4>
+        <p>has margin on sides and bottom. Margin bottom is doubled to get the equal vertical and horizontal whitespace</p>
+    </article>
+    <article class="commander">
+            <pre class="dark padding">
+// Code Example:
+
+.posts {
+    @include container();
+}
+.post--card {
+    @include grid(12, $m:6; $s:4);
+}</pre>
+    </article>
+    <article class="commander">
+            <pre class="dark padding">
+// Output:
+
+.posts {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 1rem;
+}
+
+.post--card {
+    margin: 1rem;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    @media (min-width: 480px) {
+        width: calc(50% - 2rem);
+    }
+    @media (min-width: 768px) {
+        width: calc(33.33333% - 2rem);
+    }
+}</pre>
+    </article>
+</section>
+<section class="posts border--blue">
+    .posts wrapper
+    <h2 class="card__headline dark">.card__headline--default</h2>
+    <article class="post--card dark">.card</article>
+    <article class="post--card dark">.card</article>
+    <article class="post--card dark">.card</article>
+    <article class="post--card dark">.card</article>
+</section>
+<footer>
+
+</footer>
+
+</body>
+</html>

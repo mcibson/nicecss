@@ -7,3 +7,20 @@ $primary: $blue;
 $success: $green;
 $warning: $orange;
 $danger: $red;
+
+$light: #fff;
+$dark: #333;
+
+
+$nav__link__color: $dark;
+/* Standard Classes
+=============================================================================== */
+.light {
+  background: #fff;
+  color: #333;
+}
+
+.dark {
+  background: #333;
+  color: #fff;
+}

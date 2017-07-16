@@ -7,14 +7,15 @@
 $maxWidth: 1200px;
 $gridmap: (
   // breakpoint: ($width, $spacer, $outerspacer )
-        default:    (   1px,     5px,   5px), //        Mobile             // $mobile
-        media--xs:  ( 320px,    1rem,  1rem), //  20rem Mobile Landscape   // $mobland
-        media--s:   ( 480px,    1rem,  1rem), //  30rem Mobile Landscape   // $mobland
+        default:    (   1px,    1rem, false), //        Mobile             // $mobile
+        media--xs:  ( 320px,   false, false), //  20rem Mobile Landscape   // $mobland
+        media--s:   ( 480px,   false, false), //  30rem Mobile Landscape   // $mobland
         media--m:   ( 768px,   false, false), //  48rem Tablet             // $tablet
         media--l:   (1024px,   false, false), //  64rem Tablet Landscape   // $tabland
         media--xl:  (1200px,   false, false), //  75rem Notebook           // $notebook
         media--xxl: (1600px,   false, false)  // 100rem Desktop            // $desktop
 );
+
 
 /* Fonts todo better naming
 =============================================================================== */

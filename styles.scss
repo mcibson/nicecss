@@ -5,6 +5,7 @@
 /* Settings
 =============================================================================== */
 @import "settings.scss";
+@import "base/colors";
 
 
 /* Vendor / Plugins / External Code
@@ -17,20 +18,21 @@
 =============================================================================== */
 @import "base/grid";
 @import "base/base";
-@import "base/colors";
 @import "base/fonts";
 
 
 /* Components
 =============================================================================== */
+@import "components/navigation";
 @import "components/main";
 @import "components/highlights";
 @import "components/captain";
-
+@import "components/commander";
 
 /* Custom - Examples
 =============================================================================== */
 @import "custom/example--grid";
+@import "pages/nicegrid";
 
 
 /* Helpers - Keep these @imports on Bottom of this File

@@ -33,7 +33,14 @@ $outer--l:    nth(map-get($gridmap, media--l),   3);
 $outer--xl:   nth(map-get($gridmap, media--xl),  3);
 $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
 
-
+/* Container -- Margin Bottom
+=============================================================================== */
+$container__margin-bottom:      1rem; // default value -- needs to be set
+$container__margin-bottom--s:   false;
+$container__margin-bottom--m:   false;
+$container__margin-bottom--l:   false;
+$container__margin-bottom--xl:  false;
+$container__margin-bottom--xxl: false;
 /* Helper Functions
 =============================================================================== */
 @function get_card_spacer_for($breakpoint) {
@@ -103,7 +110,10 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
     flex-direction: row;
     width: 100%;
     max-width: $maxWidth;
-    margin: 0 auto;
+    margin: 0 auto $container__margin-bottom;
+    @include jacket(ie) {
+        margin: 0 auto $container__margin-bottom;
+    }
 }
 
 /* Full Width Container */
@@ -135,6 +145,13 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
 
 /* Grid Base Mixins
 =============================================================================== */
+/** $s, $m, $l ... are the predefined breakpoints
+ *  @$default ... no breakpoint - Standard
+ *  width(12, $m:6, $l: 4) means:
+ *      width: 100%;
+ *      @breakpoint($media--m) {width: 50%;}
+ *      @breakpoint($media--l) {width: 33.33333;}
+ */
 @mixin width        ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
     width: percentage($default / $cols);
     @if $s != false {
@@ -183,6 +200,8 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
         }
     }
 }
+
+/* calculated width if box has side margins */
 @mixin width--card  ($default:12, $s:false, $m:false, $l:false, $xl:false, $xxl:false, $cols:12) {
 
     width: calc(#{percentage($default / $cols)} - #{2 * $spacer});
@@ -320,6 +339,9 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
     }
 }
 
+// padding on all sides or custom($top*$spacer, $right*$spacer ...)
+// $top:1 ... padding-top: $spacer;
+// $top:2 ... padding-top: 2*$spacer;
 @mixin padding($top:false, $right: false, $bottom: false, $left: false){
     // if custom value in Padding
     @if $top != false or false != false or false != false or $left != false {
@@ -381,6 +403,8 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
                 padding: $spacer--xxl;} }
     }
 }
+
+// padding left, right and bottom -- no padding top
 @mixin padding--default() { // padding left, right and double bottom
     padding: 0 $spacer 2*$spacer;
 
@@ -404,6 +428,8 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
         @include breakpoint($media--xxl) {
             padding: 0 $spacer--xxl 2*$spacer--xxl;} }
 }
+
+// padding on sides
 @mixin padding--horizontal(){
     padding-left: $spacer;
     padding-right: $spacer;
@@ -434,6 +460,7 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
             padding-right: $spacer--xxl; } }
 }
 
+// margin on all sides
 @mixin margin() { // margin on all sides
     margin: $spacer;
 
@@ -457,6 +484,7 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
         @include breakpoint($media--xxl) {
             margin: $spacer--xxl;} }
 }
+// marign left, right and bottom -- no margin top
 @mixin margin--default() { // margin left, right and double bottom
     margin: 0 $spacer 2*$spacer;
 
@@ -480,6 +508,7 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
         @include breakpoint($media--xxl) {
             margin: 0 $spacer--xxl 2*$spacer--xxl;} }
 }
+// margin on sides
 @mixin margin--horizontal(){
     margin-left: $spacer;
     margin-right: $spacer;
@@ -629,6 +658,16 @@ $outer--xxl:  nth(map-get($gridmap, media--xxl), 3);
 
     .container--fluid {
         @include container--fluid;
+    }
+
+    .grid {
+        @include grid(12);
+    }
+    .grid--default {
+        @include grid--default(12);
+    }
+    .padding {
+        @include padding(1,1,1,1);
     }
 }
 

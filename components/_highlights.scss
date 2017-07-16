@@ -4,10 +4,6 @@
   }
   .highlight {
     @include card--default(12, $s:6, $m:4);
-    background: #fff;
     margin-bottom: 2*$spacer;
-  }
-  .something_else {
-    background: red;
   }
 }
